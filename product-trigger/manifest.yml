@@ -1,0 +1,22 @@
+modules:
+  trigger:
+    - key: product-trigger-hello-world
+      function: main
+      events:
+        - avi:jira:created:issue
+      filter:
+        ignoreSelf: false
+        expression: event.issue.fields.summary != null
+  function:
+    - key: main
+      handler: index.run
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/41ec3e5d-3957-43a6-a525-01fce148440e
+permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
